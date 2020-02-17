@@ -13,7 +13,8 @@
 #   BOARD_TAG          = attinyx4
 #   BOARD_SUB          = 84
 
-# Arduino stuff
+ARDUINO_VERSION = 10810
+
 PROJECT_DIR              = $(shell pwd)
 BOARD_TAG                = attinyx41
 BOARD_SUB                = 841
