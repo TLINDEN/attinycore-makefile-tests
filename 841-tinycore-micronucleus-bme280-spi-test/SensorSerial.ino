@@ -38,14 +38,16 @@ SDO/MISO PA5          PA6 SDI/MOSI
 #define CS  3
 
 tiny::BME280 sensor;
-uint32_t pres, humidity;
-int32_t  temp;
-
 
 void print_measurements() {
+  uint32_t pres, humidity;
+  int32_t  temp;
+
   temp     = sensor.readFixedTempC();
   humidity = sensor.readFixedHumidity();
   pres     = sensor.readFixedPressure();
+
+  digitalWrite(LED, LOW);
 
   Serial.print("     Temperature: ");
   Serial.print(temp / 100.0);
@@ -57,6 +59,8 @@ void print_measurements() {
   Serial.print(humidity / 1000.0);
   Serial.println(" %");
   Serial.println();
+
+  digitalWrite(LED, HIGH);
 }
 
 void halt() {
@@ -67,7 +71,6 @@ void setup() {
   pinMode(LED, OUTPUT);
   Serial.begin(115200);
   Serial.println("init");
-  howlong = 500;
   if(sensor.beginSPI(CS) == false) {
     Serial.println("Sensor BME280 connect failed, check wiring!");
     halt();
