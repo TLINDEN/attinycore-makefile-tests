@@ -34,10 +34,26 @@ SDO/MISO PA5          PA6 SDI/MOSI
 #define TINY_BME280_SPI
 #include <TinyBME280.h>
 
-#define LED LED_BUILTIN
+#define LED 2 //LED_BUILTIN  // PORTB2
 #define CS  3
 
-tiny::BME280 sensor;
+static tiny::BME280 sensor;
+
+#define SET_OUTPUT(pin) DDRB  |=  (1 << pin)
+#define SET_HIGH(pin)   PORTB |=  (1 << pin)
+#define SET_LOW(pin)    PORTB &= ~(1 << pin)
+
+void print_asufloat(uint32_t val, uint16_t factor) {
+  Serial.print(val / factor);
+  Serial.print(".");
+  Serial.print(val % factor);
+}
+
+void print_asifloat(int32_t val, uint16_t factor) {
+  Serial.print(val / factor);
+  Serial.print(".");
+  Serial.print(val % factor);
+}
 
 void print_measurements() {
   uint32_t pres, humidity;
@@ -47,20 +63,23 @@ void print_measurements() {
   humidity = sensor.readFixedHumidity();
   pres     = sensor.readFixedPressure();
 
-  digitalWrite(LED, LOW);
+  SET_LOW(LED);
 
   Serial.print("     Temperature: ");
-  Serial.print(temp / 100.0);
+  print_asifloat(temp, 100);
   Serial.println(" Grad C");
+
   Serial.print("        Pressure: ");
-  Serial.print(pres / 100.0);
+  print_asufloat(pres, 100);
   Serial.println(" hPa");
+
   Serial.print("        Humidity: ");
-  Serial.print(humidity / 1000.0);
+  print_asufloat(humidity, 1000);
   Serial.println(" %");
+
   Serial.println();
 
-  digitalWrite(LED, HIGH);
+  SET_HIGH(LED);
 }
 
 void halt() {
@@ -68,7 +87,7 @@ void halt() {
 }
 
 void setup() {
-  pinMode(LED, OUTPUT);
+  SET_OUTPUT(LED);
   Serial.begin(115200);
   Serial.println("init");
   if(sensor.beginSPI(CS) == false) {
