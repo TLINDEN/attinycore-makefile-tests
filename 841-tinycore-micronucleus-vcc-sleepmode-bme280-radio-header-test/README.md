@@ -1,17 +1,15 @@
-# Usable Pins
+# Final Sensor Module
+
+This is the code for the sensore module with all components
+included, as small as possible:
 
 ```
-PIN_A0  (10)
-PIN_A1  ( 9)
-PIN_A2  ( 8)
-PIN_A3  ( 7)
-PIN_A4  ( 6)
-PIN_A5  ( 5)
-PIN_A6  ( 4)
-PIN_A7  ( 3)
-PIN_B0  ( 0)
-PIN_B1  ( 1)
-PIN_B2  ( 2)
-PIN_B3  (11)  /* RESET */
-LED_BUILTIN (2)
+   text	   data	    bss	    dec	    hex	filename
+      0	   6350	      0	   6350	   18ce	build-attinyx41-841/841-tinycore-micronucleus-vcc-sleepmode-bme280-radio-header-test.hex
 ```
+
+It features:
+
+* Runs most of the time in power save sleep mode
+* measures Vcc, temperature, humidity and pressure
+* sends the measurements via 433 MHz radio to the ESP32 module
