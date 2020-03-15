@@ -33,21 +33,26 @@
   ACSR1A |= _BV(ACD1);                       \
   CCP = 0xD8;                                \
   WDTCSR = _BV(WDIE) | SLEEP_DURATION_BITS;  \
-  CCP = 0xD8;                                \
   CLKPR = (_BV(CLKPS0) | _BV(CLKPS1));
 
-// FIXME: check!
-// PRR = 0xFF;
 
-
-// go into sleep mode and wake up after wtd timeout
-// also disable SPI
+// go into sleep mode
+// disable ADC
+// wait a little for the last serial out (if any) to flush
+// disable SPI
+// set all bits in power reduction register to one (shutdown everything)
+// actually sleep
+// wake up after WDT timeout
+// wait a little
+// re-enable SPI
 #define sleep_enter()  \
   adc_disable();       \
+  delay(10);           \
   SPCR   &= ~_BV(SPE); \
-  sleep_enable();      \
+  PRR = 0xFF;          \
   sleep_mode();        \
-  sleep_disable();     \
+  PRR = 0x00;          \
+  delay(10);           \
   SPCR = (1<<SPE)
 
 // nothing extra to do on wake up, just wake up

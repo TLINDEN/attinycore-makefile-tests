@@ -19,7 +19,7 @@
 #define VCC_8441_H
 
 // disable ADC globally
-#define adc_disable() ADCSRA &= ~(1<<ADEN)
+#define adc_disable() ADCSRA &= ~(1<<ADEN);
 
 // enable
 #define adc_enable()  ADCSRA  =  (1<<ADEN);  _delay_ms(10);
@@ -39,9 +39,14 @@
   ADCSRA |= _BV( ADSC ); \
   while( ( (ADCSRA & (1<<ADSC)) != 0 ) );
 
-// return measured voltage
-// >> 1.1 * 1024 / 225 #=> 5.006222222222223
-// >> 1.1 * 1024 / 341 #=> 3.3032258064516133
+/* return measured voltage, adc value between 1-1023
+   Calculate like:
+
+   >> 1.1 * 1024 / 225 #=> 5.006222222222223
+   >> 1.1 * 1024 / 341 #=> 3.3032258064516133
+*/
+#define adc_get_adcw() ADCW;
+
 #define adc_get_vcc() 1.1 * 1024 / ADCW;
 
 #endif
