@@ -1,0 +1,18 @@
+* Wemos Lolin D32 w/ LiPo Charger+Port
+
+| 3v3      |    | -------- |    | GND     |
+| RST      |    |          | 23 | MOSI    |
+| VP       | 36 |          | 22 | SCL     |
+| VN       | 39 |          |  1 | TX      |
+| ADC1/CH6 | 34 |          |  3 | RX      |
+| ADC1/CH4 | 32 |          | 21 | SDA     |
+| ADC1/CH5 | 33 |          | 19 | MISO    |
+| DAC1     | 25 |          | 18 | SCK/CLK |
+| DAC2     | 26 |          |  5 | SS/CS   |
+|          | 27 |          |    |         |
+|          | 14 |          |    |         |
+|          | 12 |          |  4 |         |
+| DC       | 13 |          |  0 |         |
+| EN       |    |          |  2 |         |
+| USB      |    |          | 15 |         |
+| BAT      |    |          |    | GND     |
