@@ -41,7 +41,7 @@ MNINST                   = sudo micronucleus
 # compiler stuff
 CFLAGS_STD               = -std=gnu11
 CXXFLAGS_STD             = -std=gnu++11
-CXXFLAGS               + = -pedantic -Wall -Wextra
+CXXFLAGS                += -pedantic -Wall -Wextra
 CURRENT_DIR              = $(shell pwd)
 
 # keep this!

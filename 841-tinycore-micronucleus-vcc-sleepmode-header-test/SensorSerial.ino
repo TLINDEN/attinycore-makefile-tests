@@ -41,7 +41,7 @@ SDO/MISO PA5          PA6 SDI/MOSI
 #define LED           2 //LED_BUILTIN  // PORTB2
 #define CS            3
 #define DELAY         5000
-#define WDTREPEATS    10
+#define WDTREPEATS    10 // results in 8s x 10 times == 80 seconds sleep
 
 #define SET_OUTPUT(pin) DDRB  |=  (1 << pin)
 #define SET_HIGH(pin)   PORTB |=  (1 << pin)

@@ -22,7 +22,7 @@ ARDUINO_DIR              = /usr/local/arduino
 ARDMK_DIR                = /usr/local/arduino/Arduino-Makefile
 MONITOR_PORT             = /dev/ttyACM0
 ISP_PORT                 = /dev/ttyACM0
-AVRDUDE                  = /usr/local/bin/avrdude
+AVRDUDE                  = /usr/bin/avrdude
 ARDUINO_LIBS             = 
 ARDUINO_SKETCHBOOK       = .
 
@@ -51,3 +51,6 @@ include $(ARDMK_DIR)/Arduino.mk
 install: $(TARGET_HEX) verify_size
 	@echo "########### Press RESET on the Nanite! ##############"
 	$(MNINST) $(TARGET_HEX)
+
+console:
+	screen /dev/ttyUSB0 115200

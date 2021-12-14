@@ -22,7 +22,7 @@ ARDUINO_DIR              = /usr/local/arduino
 ARDMK_DIR                = /usr/local/arduino/Arduino-Makefile
 MONITOR_PORT             = /dev/ttyACM0
 ISP_PORT                 = /dev/ttyACM0
-AVRDUDE                  = /usr/local/bin/avrdude
+AVRDUDE                  = /usr/bin/avrdude
 ARDUINO_LIBS             = SPI TinyBME280 RFTransmitter
 ARDUINO_SKETCHBOOK       = .
 
@@ -41,7 +41,7 @@ MNINST                   = sudo micronucleus
 # compiler stuff
 CFLAGS_STD               = -std=gnu11
 CXXFLAGS_STD             = -std=gnu++11
-CXXFLAGS               + = -pedantic -Wall -Wextra
+CXXFLAGS                += -pedantic -Wall -Wextra
 CURRENT_DIR              = $(shell pwd)
 
 # keep this!
@@ -51,3 +51,6 @@ include $(ARDMK_DIR)/Arduino.mk
 install: $(TARGET_HEX) verify_size
 	@echo "########### Press RESET on the Nanite! ##############"
 	$(MNINST) $(TARGET_HEX)
+
+console:
+	screen /dev/ttyUSB0 115200

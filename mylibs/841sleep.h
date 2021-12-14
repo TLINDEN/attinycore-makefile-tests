@@ -55,6 +55,21 @@
   delay(10);           \
   SPCR = (1<<SPE)
 
+// go into sleep mode, keep SPI running
+// disable ADC
+// wait a little for the last serial out (if any) to flush
+// set all bits in power reduction register to one (shutdown everything)
+// actually sleep
+// wake up after WDT timeout
+// wait a little
+#define sleep_enter_keep_spi()                           \
+  adc_disable();       \
+  delay(10);           \                       
+  PRR = 0xFF;          \
+  sleep_mode();        \
+  PRR = 0x00;          \
+  delay(10);
+
 // nothing extra to do on wake up, just wake up
 #define sleep_vect() ISR(WDT_vect){}
 
